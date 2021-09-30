@@ -9,14 +9,33 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    calendar.cpp \
+    home.cpp \
+    launchwindow.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    planner.cpp
 
 HEADERS += \
-    mainwindow.h
+    calendar.h \
+    headers.h \
+    home.h \
+    launchwindow.h \
+    mainwindow.h \
+    planner.h
 
 FORMS += \
-    mainwindow.ui
+    calendar.ui \
+    home.ui \
+    launchwindow.ui \
+    mainwindow.ui \
+    planner.ui
+
+win32-g++ {
+    INCLUDEPATH += C:\boost\include\boost-1_66
+} else:win32-msvc* {
+    INCLUDEPATH += C:\boost\include\boost-1_66
+}
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
