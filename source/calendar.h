@@ -1,7 +1,14 @@
 #ifndef CALENDAR_H
 #define CALENDAR_H
 
-#include "headers.h"
+#include <QWidget>
+#include <QPushButton>
+#include <QGridLayout>
+#include <QDebug>
+#include <QPainter>
+#include <QTextCharFormat>
+#include <QCalendarWidget>
+#include <database.h>
 
 struct Days {
 
@@ -26,15 +33,28 @@ public:
     explicit Calendar(QWidget *parent = nullptr);
     ~Calendar() override;
 
-    QWidget create_month(int idx, QString name);
+    void create_month(int idx, QString name);
+
+private slots:
+    void on_prew_clicked();
+    void on_next_clicked();
+
+    void check_day();
 
 private:
+    void set_date(QDate);
+    void set_marks();
+    //void set_icons();
+    void show_notes(QDate);
     Ui::Calendar *ui;
 
 ///days button
 private:
-    QWidget create_grid();
-    //QPushButton create_button();
+    QPushButton* butt;
+    void onClickButton();
+    void create_grid(int col, int row);
+
+protected:
 };
 
 #endif // CALENDAR_H

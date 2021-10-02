@@ -1,0 +1,18 @@
+<RCC>
+    <qresource prefix="/icons">
+        <file>ui_icons/standart/free-icon-sticky-note-2132741.png</file>
+        <file>ui_icons/standart/free-icon-calendar-149357.png</file>
+        <file>ui_icons/standart/free-icon-calendar-149377.png</file>
+        <file>ui_icons/standart/free-icon-calendar-white.png</file>
+        <file>ui_icons/standart/free-icon-exit-149410.png</file>
+        <file>ui_icons/standart/free-icon-home-149423.png</file>
+        <file>ui_icons/standart/free-icon-home-white.png</file>
+        <file>ui_icons/standart/free-icon-planner-white.png</file>
+        <file>ui_icons/standart/free-icon-settings-149293.png</file>
+        <file>ui_icons/standart/free-icon-settings-whitepng.png</file>
+        <file>ui_icons/standart/side icon.png</file>
+        <file>ui_icons/standart/eventindicator.png</file>
+        <file>ui_icons/standart/free-icon-right-arrow-134208.png</file>
+        <file>ui_icons/standart/left.png</file>
+    </qresource>
+</RCC>

@@ -2,6 +2,7 @@
 #define HOME_H
 
 #include <QWidget>
+#include <QPushButton>
 
 namespace Ui {
 class Home;
@@ -13,7 +14,7 @@ class Home : public QWidget
 
 public:
     explicit Home(QWidget *parent = nullptr);
-    ~Home();
+    ~Home() override;
 
 private:
     Ui::Home *ui;
