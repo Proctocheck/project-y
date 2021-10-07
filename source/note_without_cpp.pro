@@ -10,6 +10,7 @@ CONFIG += c++11
 
 SOURCES += \
     calendar.cpp \
+    database.cpp \
     home.cpp \
     launchwindow.cpp \
     main.cpp \
@@ -18,6 +19,7 @@ SOURCES += \
 
 HEADERS += \
     calendar.h \
+    database.h \
     headers.h \
     home.h \
     launchwindow.h \

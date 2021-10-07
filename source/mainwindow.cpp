@@ -17,43 +17,6 @@ MainWindow::~MainWindow() {
     delete ui;
 }
 
-
-/*void MainWindow::on_show_side_frame_clicked() {
-
-
-    QPropertyAnimation* anim = new QPropertyAnimation(ui->side_frame, "geometry");
-    //QPropertyAnimation* banim = new QPropertyAnimation(ui->show_side_frame, "geometry");
-
-    QRect begin_f = ui->side_frame->geometry();
-    QRect end_f;
-    //QRect begin_b = ui->show_side_frame->geometry();
-    QRect end_b;
-
-    if (ui->side_frame->geometry() != QRect(0,0,270,621)) {
-
-        end_f = QRect(0,0,270,621);
-        end_b = QRect(10,10,60,50);
-    }
-    else {
-
-        end_f = QRect(-190,0,270,621);
-        end_b = QRect(200,10,60,50);
-    }
-
-    anim->setDuration(100);
-    anim->setStartValue(begin_f);
-    anim->setEndValue(end_f);
-
-//    banim->setDuration(100);
-//    banim->setStartValue(begin_b);
-//    banim->setEndValue(end_b);
-
-    anim->start();
-    //banim->start();
-
-}
-*/
-
 void MainWindow::on_exit_clicked() {
 
     this->close();
@@ -65,12 +28,11 @@ void MainWindow::removeWidget() {
     delete b;
 }
 
-
-
 ///side frame
 void MainWindow::on_home_clicked() {
 
-    ui->tabWidget->addTab(new Home(),"Home");
+    Home* home = new Home();
+    ui->tabWidget->addTab(home,"Home");
 }
 
 void MainWindow::on_calendar_clicked() {
@@ -81,6 +43,7 @@ void MainWindow::on_calendar_clicked() {
 
 void MainWindow::on_planner_clicked() {
 
+    Planner* plan = new Planner();
     ui->tabWidget->addTab(new Planner(),"Planner");
 }
 
@@ -127,31 +90,10 @@ bool MainWindow::eventFilter(QObject *obj, QEvent *event) {
 
         QEvent::Type type = event->type();
         if  (type == QEvent::Leave)
-            check_obj = NULL;
+            check_obj = nullptr;
         else if (type == QEvent::Enter)
             check_obj = obj;
     }
-    /*
- *        //        if (type == QEvent::MouseButtonPress) {
-
-        //            QMouseEvent *m_event;
-        //            if (m_event->button() == Qt::LeftButton)
-        //                oldPos = m_event->pos();
-
-        //        }
-        //        if (type == QEvent::MouseMove) {
-
-        //            QMouseEvent *m_event;
-        //            this->move(this->pos() + m_event->globalPos() - oldPos);
-        //        }
-//        if (type == QEvent::MouseButtonPress)
-//            if (m_event->button() == Qt::LeftButton)
-//                oldPos = m_event->pos();
-//        if (type == QEvent::MouseMove) {
-
-//            QPoint delta = m_event->pos() - oldPos;
-//            move(pos() + delta);
-//        }*/
 
     return QWidget::eventFilter(obj, event);
 }

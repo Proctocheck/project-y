@@ -2,6 +2,7 @@
 #define PLANNER_H
 
 #include <QWidget>
+#include <QPushButton>
 
 namespace Ui {
 class Planner;
@@ -13,7 +14,7 @@ class Planner : public QWidget
 
 public:
     explicit Planner(QWidget *parent = nullptr);
-    ~Planner();
+    ~Planner() override;
 
 private:
     Ui::Planner *ui;
