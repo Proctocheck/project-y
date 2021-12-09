@@ -4,19 +4,23 @@
 //std
 #include <iostream>
 #include <vector>
+#include <string>
 
 //qmake
-#include <QMainWindow>
 #include <QWidget>
+#include <QPushButton>
+#include <QGridLayout>
+#include <QDebug>
+#include <QFrame>
+#include <QCalendarWidget>
+#include <QMainWindow>
 #include <QtCore>
 #include <QtGui>
+#include <QSizeGrip>
+#include <QMessageBox>
+#include <QResizeEvent>
 
-//Boost / OS
-#include <boost/date_time.hpp>
-
-//Widgets
-#include "home.h"
-#include "calendar.h"
-#include "planner.h"
+//SQL
+//#include "database.h"
 
 #endif // HEADERS_H

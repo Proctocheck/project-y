@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "launchwindow.h"
+#include "compactor.h"
 #include <QApplication>
 
 int main(int argc, char *argv[])
@@ -9,7 +10,8 @@ int main(int argc, char *argv[])
 //    l.show();
 //    MainWindow m;
 //    m.show();
-    Calendar cal;
-    cal.show();
+//    Calendar cal;
+//    cal.show();
+    Compactor c;
     return a.exec();
 }

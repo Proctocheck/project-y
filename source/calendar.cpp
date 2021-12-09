@@ -7,39 +7,44 @@ Calendar::Calendar(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    QObject::connect(ui->calendarWidget, SIGNAL(clicked(QDate)),
-                     this, SLOT(check_day()));
+    //    QObject::connect(ui->calendarWidget, SIGNAL(clicked(QDate)),
+    //                     this, SLOT(check_day()));
 
-    set_date(ui->calendarWidget->selectedDate());
+    setDate(ui->calendarWidget->selectedDate());
+    setMarks();
+    checkNotes(ui->calendarWidget->selectedDate());
 
-    QTextCharFormat format;
-    QBrush brush;
-    QImage image;
-    image.load("qrc:/icons/ui_icons/standart/eventindicator.png");
-    brush.setTextureImage(image);
-    format.setBackground(brush);
-    ui->calendarWidget->setDateTextFormat(QDate(2021,10,2), format);
+    //setTheme("dark");
 
-    //paintCell(new QPainter(),rect(),ui->calendarWidget->selectedDate());
-    //set_icons();
-
-    //сюда нужно подавать кол-во дней текущего месяца и его название
-    //create_month(30, "сентябрь");
-
-    //this->setMinimumHeight(618);
-    //this->setMinimumWidth(940);
-    //delete ui->none;
-    butt = nullptr;
+    _note = nullptr;
+    _butt = nullptr;
+    _layout = nullptr;
 }
 
-void Calendar::check_day()
+Calendar::~Calendar()
 {
-    QCalendarWidget* cal =qobject_cast<QCalendarWidget*>(sender());
-    QDate date = cal->selectedDate();
-    set_date(date);
+    delete ui;
 }
 
-void Calendar::set_date(QDate time)
+void Calendar::setTheme(QString theme)
+{
+    if (theme == "dark") {
+        ui->calendarWidget->setStyleSheet("alternate-background-color: rgb(29, 54, 62)");
+        ui->scrollArea->setStyleSheet("background-color: rgb(29, 54, 62)");
+    }
+    if (theme == "light") {
+        ui->calendarWidget->setStyleSheet("alternate-background-color: rgb(239, 239, 239);");
+        ui->scrollArea->setStyleSheet("background-color: rgb(255, 255, 255)");
+    }
+}
+
+void Calendar::checkDay(QDate date)
+{
+    setDate(date);
+    checkNotes(date);
+}
+
+void Calendar::setDate(QDate time)
 {
     ui->Date->setText(time.toString("MMMM yyyy"));
     ui->Date->setStyleSheet("QTextEdit { font-size: 14px; text-align: left; }");
@@ -50,65 +55,55 @@ void Calendar::set_date(QDate time)
     //ui->
 }
 
-void Calendar::show_notes(QDate date)
+void Calendar::checkNotes(QDate date)
 {
+    QDate d,d1;
+    d.setDate(2021,12,3);
+    d1.setDate(2021,12,14);
+    //QMessageBox::critical(this, "qwd", "qwdqwd");
+    while(ui->scroll_layout->count() > 0) {
+        QLayout* layout = ui->scroll_layout->takeAt(0)->layout();
+        while(layout->count() > 0) {
+            QLayoutItem* item =  layout->takeAt(0);
+            delete item->widget();
+            delete item;
+        }
 
+        delete layout;
+    }
+    if (d == date) {
+        showNotes(0,"кнопка","текст для label", "note");
+    }
+    if (d1 == date) {
+        showNotes(1,"кнопка","fgergerg", "note");
+    }
 }
 
-Calendar::~Calendar()
+void Calendar::setMarks()
 {
-    delete ui;
+    //работа с database
+    int day = 3, month = 12, year = 2021;
+
+    //тут будет цикл где мы будем бегать по массиву и по очереди грузить кнопочки
+    int i = 0;
+    while (i<1) {
+        if (true) {
+            QTextCharFormat format;
+            format.setBackground(Qt::yellow);
+            //ui->calendarWidget->s
+            ui->calendarWidget->setDateTextFormat(QDate(year,month,day), format);
+            //showNotes(i,"текст для кнопки","текст для label", "note");
+        }
+        i++;
+    }
 }
-
-
-/*
-void Calendar::create_month(int idx, QString name)
-{
-
-    for(int i=0;i<6;i++)
-        for(int j=0;j<7;j++)
-            create_grid(i,j);
-}
-
-
- * /void Calendar::create_grid(int col, int row) {
-
-//    QGridLayout* layout = ui->DayListGrid;
-//    QString buttonText = QString::number(col*7+row+1);
-//    QPushButton* button = new QPushButton(buttonText,this);
-//    button->setMinimumHeight(80);
-//    button->setMinimumWidth(80);
-//    button->setSizePolicy(QSizePolicy::Preferred,QSizePolicy::Preferred);
-//    button->setText(buttonText);
-//    button->setStyleSheet("border: none;");
-//    layout->addWidget(button,col,row);
-
-//    QObject::connect(button, &QPushButton::clicked, this, &Calendar::onClickButton);
-//}
-
-//void Calendar::onClickButton() {
-
-//    QPushButton* button =qobject_cast<QPushButton*>(sender());
-////    delete button;
-//    if (butt == nullptr) {
-
-//        button->setStyleSheet("background-color: rgb(0, 255, 0);");
-//        butt = button;
-//    }
-//    else {
-
-//        butt->setStyleSheet("background-color: rgb(255, 255, 255); border: none;");
-//        button->setStyleSheet("background-color: rgb(0, 255, 0);");
-//        butt = button;
-//    }
-//}*/
 
 void Calendar::on_prew_clicked()
 {
     QDate time =  ui->calendarWidget->selectedDate();
     (time.month() - 1<1) ? time.setDate(time.year()-1,12,time.day()) : time.setDate(time.year(),time.month()-1,time.day());
     ui->calendarWidget->setSelectedDate(time);
-    set_date(time);
+    setDate(time);
 }
 
 void Calendar::on_next_clicked()
@@ -116,5 +111,118 @@ void Calendar::on_next_clicked()
     QDate time =  ui->calendarWidget->selectedDate();
     (time.month() + 1>12) ? time.setDate(time.year()+1,1,time.day()) : time.setDate(time.year(),time.month()+1,time.day());
     ui->calendarWidget->setSelectedDate(time);
-    set_date(time);
+    setDate(time);
+}
+
+void Calendar::on_calendarWidget_clicked(const QDate &date)
+{
+    checkDay(date);
+}
+
+void Calendar::showNotes(int n, QString buttonText, QString labeltext, QString type)//передаём какой-то массив
+{
+    //также это тоже нужно сделать в цикле, где из базы данных мы будем брать {название, содержимое, тип}
+    QPushButton* change = new QPushButton();//buttonText);
+    QLabel* l = new QLabel(labeltext);
+    QPushButton* cross = new QPushButton();
+
+    change->setFixedSize(60,60);
+    //button->setIcon(QPixmap(":/icons/ui_icons/standart/gotonote.png"));
+    change->setIcon(QPixmap(":/icons/ui_icons/standart/cross.png"));
+    change->setIconSize(QSize(55,55));
+
+    cross->setFixedSize(60,60);
+    cross->setIcon(QPixmap(":/icons/ui_icons/standart/cross.png"));
+    cross->setIconSize(QSize(50,50));
+    cross->setFlat(true);
+
+    l->setFixedSize(190,60);
+    //l->setStyleSheet("background-image: url(:/icons/ui_icons/standart/eventindicator.png);");
+
+    QHBoxLayout* layout = new QHBoxLayout();
+
+    //if (type == "note")
+    //    l->setStyleSheet("background: red;");
+
+    layout->addWidget(l);
+    layout->addWidget(change);
+    layout->addWidget(cross);
+    layout->setContentsMargins(0,0,0,0);
+
+    ui->scroll_layout->addLayout(layout,n,0);
+    HashNoteCrossLayout.insert(cross,layout);
+    HashNoteChangeLayout.insert(change,layout);
+
+    QObject::connect(cross, &QAbstractButton::clicked, this, &Calendar::removeNote);
+    QObject::connect(change, &QAbstractButton::clicked, this, &Calendar::changeNote);
+    //QObject::connect(button, &QAbstractButton::close, this, &Calendar::showWindowNote); на будущее
+    //тут мы будем коннектить кнопку с скакому-то действию(желательно, чтобы у нас в tab_widget высветилось новое окно, но это маловероятно(((()
+    //QObject::connect(button, &QAbstractButton::clicked, this, &Calendar::checkDay);
+}
+
+void Calendar::removeNote()
+{
+    QMessageBox* pmbx =
+            new QMessageBox("Внимание!",
+                            "Вы действительно хотите удалить заметку?",
+                            QMessageBox::Information,
+                            QMessageBox::Yes,
+                            QMessageBox::No,
+                            QMessageBox::Cancel | QMessageBox::Escape);
+    int n = pmbx->exec();
+    delete pmbx;
+    if (n == QMessageBox::No || n == QMessageBox::Cancel)
+    {
+        return;
+    }
+
+
+    //нужна реализация удаления из памяти. т.к. все заметки выводятся последовательно, то нужно просто удалять самый верхний элемент
+    QPushButton* button = qobject_cast<QPushButton*>(sender());
+    QHBoxLayout* layout = HashNoteCrossLayout.value(button);
+    if (HashNoteCrossLayout.value(button) == nullptr)
+        layout = HashNoteChangeLayout.value(_butt);
+
+    while(layout->count() != 0) {
+        QLayoutItem* item =  layout->takeAt(0);
+        delete item->widget();
+        delete item;
+    }
+
+    delete layout;
+
+    if (_note != nullptr) {
+        _note->close();
+        _note = nullptr;
+    }
+}
+
+void Calendar::changeNote()
+{
+    QPushButton* button = qobject_cast<QPushButton*>(sender());
+    NoteWindow* note = new NoteWindow();
+    _note = note;
+    note->show();
+
+    _butt = button;
+
+    QHBoxLayout* layout = HashNoteChangeLayout.value(button);
+    _layout = layout;
+    _layout->setEnabled(false);
+
+    QObject::connect(note, SIGNAL(save_note()), this, SLOT(updateNote()));
+    QObject::connect(note, SIGNAL(close_note()), this, SLOT(closeNote()));
+    QObject::connect(note, SIGNAL(note_delete()), this, SLOT(removeNote()));
+}
+
+void Calendar::updateNote()
+{
+    //обновляем инфу по заметке
+}
+
+void Calendar::closeNote()
+{
+    _layout->setEnabled(true);
+    _layout = nullptr;
+    _note = nullptr;
 }

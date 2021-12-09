@@ -14,5 +14,13 @@
         <file>ui_icons/standart/eventindicator.png</file>
         <file>ui_icons/standart/free-icon-right-arrow-134208.png</file>
         <file>ui_icons/standart/left.png</file>
+        <file>ui_icons/standart/gotonote.png</file>
+        <file>ui_icons/standart/cross.png</file>
+        <file>ui_icons/standart/free-icon-edit-149307.png</file>
+        <file>ui_icons/standart/free-icon-save-149111.png</file>
+        <file>ui_icons/standart/free-icon-garbage-149343.png</file>
+        <file>ui_icons/standart/free-icon-add-3914248.png</file>
+        <file>ui_icons/light/leftarrow.png</file>
+        <file>ui_icons/light/rightarrow.png</file>
     </qresource>
 </RCC>

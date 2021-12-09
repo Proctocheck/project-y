@@ -12,13 +12,14 @@ class LaunchWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    void launch();
     LaunchWindow(QWidget *parent = nullptr);
     ~LaunchWindow();
-    QTimer* t;
-    int c;
 private:
     Ui::LaunchWindow *ui;
+
+    QTimer* t;
+    int c;
+    void launch();
 private slots:
     void aboba();
 };

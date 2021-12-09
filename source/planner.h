@@ -1,8 +1,8 @@
 #ifndef PLANNER_H
 #define PLANNER_H
 
-#include <QWidget>
-#include <QPushButton>
+//#include "headers.h"
+#include "noteframe.h"
 
 namespace Ui {
 class Planner;
@@ -17,6 +17,14 @@ public:
     ~Planner() override;
 
 private:
+    void resizeEvent(QResizeEvent *event) override;
+
+    void sort_notes(int n);
+
+private:
+    int columns;
+    //DataBase* db = new DataBase();
+
     Ui::Planner *ui;
 };
 

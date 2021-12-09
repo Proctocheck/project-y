@@ -19,18 +19,21 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true"/>
+  </property>
   <layout class="QGridLayout" name="mainGrid">
    <property name="leftMargin">
-    <number>25</number>
+    <number>0</number>
    </property>
    <property name="topMargin">
-    <number>22</number>
+    <number>0</number>
    </property>
    <property name="rightMargin">
-    <number>22</number>
+    <number>0</number>
    </property>
    <property name="bottomMargin">
-    <number>22</number>
+    <number>0</number>
    </property>
    <property name="horizontalSpacing">
     <number>15</number>
@@ -42,12 +45,12 @@
     <widget class="QFrame" name="calendar">
      <property name="minimumSize">
       <size>
-       <width>520</width>
+       <width>0</width>
        <height>0</height>
       </size>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-color: rgb(255, 255, 255);</string>
+      <string notr="true"/>
      </property>
      <property name="frameShape">
       <enum>QFrame::StyledPanel</enum>
@@ -96,7 +99,7 @@
         </property>
         <property name="icon">
          <iconset resource="ui_source.qrc">
-          <normaloff>:/icons/ui_icons/standart/left.png</normaloff>:/icons/ui_icons/standart/left.png</iconset>
+          <normaloff>:/icons/ui_icons/light/rightarrow.png</normaloff>:/icons/ui_icons/light/rightarrow.png</iconset>
         </property>
         <property name="flat">
          <bool>false</bool>
@@ -144,7 +147,7 @@
         </property>
         <property name="icon">
          <iconset resource="ui_source.qrc">
-          <normaloff>:/icons/ui_icons/standart/free-icon-right-arrow-134208.png</normaloff>:/icons/ui_icons/standart/free-icon-right-arrow-134208.png</iconset>
+          <normaloff>:/icons/ui_icons/light/leftarrow.png</normaloff>:/icons/ui_icons/light/leftarrow.png</iconset>
         </property>
         <property name="flat">
          <bool>false</bool>
@@ -262,7 +265,7 @@
       </size>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-color: rgb(255, 255, 255);</string>
+      <string notr="true"/>
      </property>
      <property name="frameShape">
       <enum>QFrame::StyledPanel</enum>
@@ -271,6 +274,79 @@
       <enum>QFrame::Raised</enum>
      </property>
      <layout class="QGridLayout" name="notesGrid">
+      <property name="topMargin">
+       <number>0</number>
+      </property>
+      <item row="2" column="0" colspan="2">
+       <widget class="QScrollArea" name="scrollArea">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>450</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <property name="widgetResizable">
+         <bool>true</bool>
+        </property>
+        <widget class="QWidget" name="scroll_layout_">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>324</width>
+           <height>499</height>
+          </rect>
+         </property>
+         <layout class="QGridLayout" name="scroll_layout">
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <property name="horizontalSpacing">
+           <number>0</number>
+          </property>
+          <property name="verticalSpacing">
+           <number>4</number>
+          </property>
+         </layout>
+        </widget>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QLabel" name="MonthYear">
+        <property name="minimumSize">
+         <size>
+          <width>279</width>
+          <height>36</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>279</width>
+          <height>36</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Сертябрь 2021</string>
+        </property>
+       </widget>
+      </item>
       <item row="0" column="0" rowspan="2">
        <widget class="QLabel" name="day">
         <property name="sizePolicy">
@@ -331,46 +407,6 @@
         </property>
         <property name="text">
          <string>среда</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="1">
-       <widget class="QLabel" name="MonthYear">
-        <property name="minimumSize">
-         <size>
-          <width>279</width>
-          <height>36</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>279</width>
-          <height>36</height>
-         </size>
-        </property>
-        <property name="font">
-         <font>
-          <pointsize>12</pointsize>
-         </font>
-        </property>
-        <property name="text">
-         <string>Сертябрь 2021</string>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="0" colspan="2">
-       <widget class="QFrame" name="noteList">
-        <property name="minimumSize">
-         <size>
-          <width>0</width>
-          <height>470</height>
-         </size>
-        </property>
-        <property name="frameShape">
-         <enum>QFrame::StyledPanel</enum>
-        </property>
-        <property name="frameShadow">
-         <enum>QFrame::Raised</enum>
         </property>
        </widget>
       </item>

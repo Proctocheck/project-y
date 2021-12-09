@@ -21,7 +21,8 @@ LaunchWindow::~LaunchWindow()
     delete ui;
 }
 
-void LaunchWindow::aboba() {
+void LaunchWindow::aboba()
+{
 
     ui->progressBar->setValue(c);
 

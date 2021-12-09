@@ -1,25 +1,8 @@
 #ifndef CALENDAR_H
 #define CALENDAR_H
 
-#include <QWidget>
-#include <QPushButton>
-#include <QGridLayout>
-#include <QDebug>
-#include <QPainter>
-#include <QTextCharFormat>
-#include <QCalendarWidget>
-#include <database.h>
-
-struct Days {
-
-    QString Sunday = "su";
-    QString Monday = "mn";
-    QString Tuesday = "tu";
-    QString Wensday = "we";
-    QString Thursday = "th";
-    QString Friday = "fr";
-    QString Saturday = "st";
-};
+//#include "headers.h"
+#include "notewindow.h"
 
 namespace Ui {
 class Calendar;
@@ -33,28 +16,45 @@ public:
     explicit Calendar(QWidget *parent = nullptr);
     ~Calendar() override;
 
-    void create_month(int idx, QString name);
+    //void setDataBase(DataBase db);
 
 private slots:
     void on_prew_clicked();
     void on_next_clicked();
 
-    void check_day();
+    void on_calendarWidget_clicked(const QDate &date);
+
+    void removeNote();
+    void changeNote();
+
+    void updateNote();
+    void closeNote();
 
 private:
-    void set_date(QDate);
-    void set_marks();
-    //void set_icons();
-    void show_notes(QDate);
+    void setTheme(QString theme);
+
+    void setDate(QDate);
+    void setMarks();
+
+    void checkDay(QDate date);
+    void checkNotes(QDate date);
+
+    void showNotes(int n, QString buttonText, QString labeltext, QString type);
+
+    //DataBase* db = new DataBase();
+private:
     Ui::Calendar *ui;
 
+    QHash<QPushButton*,QHBoxLayout*> HashNoteCrossLayout;
+    QHash<QPushButton*,QHBoxLayout*> HashNoteChangeLayout;
+    QPushButton* _butt;
+    QHBoxLayout* _layout;
+    NoteWindow* _note;
 ///days button
-private:
-    QPushButton* butt;
-    void onClickButton();
-    void create_grid(int col, int row);
+//private:
+    //void on_Click_Button();
+    //void create_grid(int col, int row);
 
-protected:
 };
 
 #endif // CALENDAR_H
